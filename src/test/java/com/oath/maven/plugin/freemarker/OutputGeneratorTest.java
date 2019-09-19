@@ -3,33 +3,30 @@
 
 package com.oath.maven.plugin.freemarker;
 
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-import freemarker.cache.FileTemplateLoader;
-import freemarker.template.Configuration;
-import mockit.Expectations;
-import mockit.Mocked;
-import org.apache.maven.execution.MavenSession;
-import org.apache.maven.project.MavenProject;
-import org.assertj.core.api.Assertions;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeMethod;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.util.*;
-
 import static junit.framework.Assert.assertEquals;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.assertj.core.api.Assertions;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import freemarker.cache.FileTemplateLoader;
+import freemarker.template.Configuration;
+import mockit.Expectations;
+import mockit.Mocked;
 
 public class OutputGeneratorTest {
 
@@ -40,7 +37,8 @@ public class OutputGeneratorTest {
 	private Configuration config;
 	private Map<String, Object> dataModel = new HashMap<String,Object>();
 
-	@BeforeMethod
+	@SuppressWarnings("unchecked")
+  @BeforeMethod
 	public void setupDataModel() {
 		dataModel.clear();
 		dataModel.put("testVar", "test value");
@@ -184,9 +182,10 @@ public class OutputGeneratorTest {
 		dataModel.remove("testVar");
 		builder.addDataModel(dataModel);
 		OutputGenerator generator = builder.create();
-		Assertions.assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+		String missingFile = "src/test/data/generating-file-visitor/data/mydir/missing-var-test.txt.json".replaceAll("/", File.separator.replace("\\", "\\\\"));
+    Assertions.assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
 			generator.generate(config);
-		}).withMessage("Could not process template associated with data file: src/test/data/generating-file-visitor/data/mydir/missing-var-test.txt.json");
+		}).withMessage("Could not process template associated with data file: "+missingFile);
 	}
 
 	@Test
