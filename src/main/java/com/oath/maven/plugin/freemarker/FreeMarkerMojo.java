@@ -106,4 +106,61 @@ public class FreeMarkerMojo extends AbstractMojo {
       throw new MojoExecutionException("Failed to process files in generator dir: " + generatorDirectory);
     }
   }
+
+  public String getFreeMarkerVersion() {
+    return freeMarkerVersion;
+  }
+
+  public void setFreeMarkerVersion(String freeMarkerVersion) {
+    this.freeMarkerVersion = freeMarkerVersion;
+  }
+
+  public File getSourceDirectory() {
+    return sourceDirectory;
+  }
+
+  public void setSourceDirectory(File sourceDirectory) {
+    this.sourceDirectory = sourceDirectory;
+  }
+
+  public File getTemplateDirectory() {
+    return templateDirectory;
+  }
+
+  public void setTemplateDirectory(File templateDirectory) {
+    this.templateDirectory = templateDirectory;
+  }
+
+  public File getGeneratorDirectory() {
+    return generatorDirectory;
+  }
+
+  public void setGeneratorDirectory(File generatorDirectory) {
+    this.generatorDirectory = generatorDirectory;
+  }
+
+  public File getOutputDirectory() {
+    return outputDirectory;
+  }
+
+  public void setOutputDirectory(File outputDirectory) {
+    this.outputDirectory = outputDirectory;
+  }
+
+  public MavenSession getSession() {
+    return session;
+  }
+
+  public void setSession(MavenSession session) {
+    this.session = session;
+  }
+
+  public MojoExecution getMojo() {
+    return mojo;
+  }
+
+  public void setMojo(MojoExecution mojo) {
+    this.mojo = mojo;
+  }
+  
 }
