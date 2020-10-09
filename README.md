@@ -50,7 +50,7 @@ Add the following snippet within the `<plugins>` tag of your pom.xml:
             </goals>
             <configuration>
               <!-- Optional, defaults to src/main/freemarker -->
-              <sourceDirectory>src/main/freemarker</templateDirectory>
+              <sourceDirectory>src/main/freemarker</sourceDirectory>
               <!-- Optional, defaults to src/main/freemarker/template -->
               <templateDirectory>src/main/freemarker/template</templateDirectory>
               <!-- Optional, defaults to src/main/freemarker/generator -->
