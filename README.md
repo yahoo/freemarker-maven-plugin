@@ -1,3 +1,6 @@
+
+# ARCHIVED 
+
 # freemarker-maven-plugin
 > A flexible plugin to generate source files from FreeMarker templates and JSON data.
 
